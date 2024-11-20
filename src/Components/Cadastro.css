@@ -1,0 +1,93 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+h2 {
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.formulario {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.labels {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+}
+
+.labels label {
+    margin-bottom: 0.5rem;
+    font-weight: normal;
+    font-size: .9rem;
+    color: #333333eb;
+}
+
+.labels input, input {
+    width: 100%;
+    /* Faz os inputs ocuparem 100% da largura disponível */
+    padding: 1rem 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    /* Inclui padding e border dentro da largura total do input */
+}
+
+.submit-btn {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    width: 100%;
+    /* O botão também ocupa 100% da largura */
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #1976d2;
+}
+
+.signup-link {
+    margin-top: 1rem;
+    text-align: center;
+    color: #333;
+}
+
+.signup-link a {
+    color: #2196F3;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    font-size: 15px;
+    align-self: flex-start;
+    color: #960000;
+
+}
