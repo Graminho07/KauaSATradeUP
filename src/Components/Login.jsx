@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaUser, FaLock } from 'react-icons/fa';
-import './Login.css'; 
+import './Login.css';
 import EsqSenha from './EsqueceuSenha';
 
 const Login = () => {
@@ -8,14 +8,16 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [isVisible, setVisible] = useState(false);
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleModal = () => setVisible(!isVisible);
 
     const handleLogin = async () => {
-        setError(''); 
+        setError('');
+        setLoading(true);
 
         try {
-            const response = await fetch('http://localhost:3000/api', { 
+            const response = await fetch('http://localhost:3000/api', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -24,16 +26,16 @@ const Login = () => {
             });
 
             const data = await response.json();
+            setLoading(false);
 
             if (response.ok) {
-                const mockUser = { name: data.name || 'Usuário', email };
-                localStorage.setItem('user', JSON.stringify(mockUser));
-
+                localStorage.setItem('user', JSON.stringify(data.user));
                 window.location.href = '/home';
             } else {
                 setError(data.message || 'Erro ao realizar login.');
             }
         } catch (error) {
+            setLoading(false);
             setError('Erro no servidor. Tente novamente mais tarde.');
         }
     };
@@ -45,8 +47,8 @@ const Login = () => {
                 <h2>Trade Up</h2>
                 <div className="input1">
                     <FaUser className="icon" />
-                    <input 
-                        type="email" 
+                    <input
+                        type="email"
                         placeholder="E-mail"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -55,8 +57,8 @@ const Login = () => {
                 </div>
                 <div className="input2">
                     <FaLock className="icon" />
-                    <input 
-                        type="password" 
+                    <input
+                        type="password"
                         placeholder="Senha"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -72,7 +74,9 @@ const Login = () => {
                     </label>
                     <a href="#" onClick={handleModal}>Esqueceu a senha?</a>
                 </div>
-                <button type="button" onClick={handleLogin}>Entrar</button>
+                <button type="button" onClick={handleLogin} disabled={loading}>
+                    {loading ? 'Carregando...' : 'Entrar'}
+                </button>
                 <div className="signup-link">
                     <p>Não tem uma conta? <a href="/Cadastro">Cadastre-se</a></p>
                 </div>

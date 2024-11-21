@@ -14,7 +14,13 @@ const loginUser = async (req, res) => {
         }
 
         return res.status(200).json({
-            message: "Login bem-sucedido!"
+            message: "Login bem-sucedido!",
+            user: {
+                name: user.nome,
+                email: user.email,
+                dataNasc: user.dataNasc,
+                cpf: user.cpf
+            }
         });
     } catch (error) {
         console.error("Erro ao realizar o login:", error);

@@ -6,11 +6,11 @@
   background-color: #f7f7f7;
 }
 
-body,
-html {
-  padding: 0;
+html, body {
+  height: 100%;
   margin: 0;
-  box-sizing: border-box;
+  padding: 0;
+  overflow: hidden;
   width: 100%;
 }
 
@@ -33,12 +33,17 @@ html {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+body{
+  overflow: hidden;
+}
+
 .container {
   width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 form {
@@ -48,9 +53,28 @@ form {
   justify-content: center;
 }
 
+.profileIcon{
+  font-size: 60px;
+}
 
 .home {
   width: 100%;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 30px;
+  padding: 5px 10px;
+  width: 50%;
+}
+
+.search input {
+  border: none;
+  outline: none;
+  margin-left: 5px;
+  border-radius: 30px;
 }
 
 @keyframes logo-spin {
@@ -89,6 +113,7 @@ a:hover {
 
 * {
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 h1 {
@@ -106,6 +131,7 @@ h1 {
   background-color: #ffe818;
   font-size: 1.15rem;
   border-radius: 0 0 2rem 2rem;
+  box-shadow: 2px 2px 2px 2px #a3a3a3;
 }
 
 .user-data {
@@ -117,23 +143,173 @@ h1 {
   width: 50%;
 }
 
-.content {
-  padding: 10rem 8rem;
+.novoAnuncio{
+  display: flex;
+  justify-content: center;
 }
 
-.content div {
+.novoAnuncio button{
+  width: 10%;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
-  font-size: 1.5rem;
-  padding-left: 2rem;
+  text-align: center;
+  justify-content: center;
+  background-color: #e6e6e6;
+  transition: .3s;
+  border-radius: 20px;
 }
 
-.icon-add {
-  color: #ffe818;
-  font-size: 4rem;
+.novoAnuncio button:hover{
+  transform: scale(1.05);
+  box-shadow: 1px 1px 1px 1px #b6b6b6;
+  background-color: #ffe818;
+}
+
+.novoAnuncio .icon-add{
+  color: #575757;
+  font-size: 30px;
+  margin-right: 5px;
+}
+
+.novoAnuncio p{
+  color: #000000;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 20px;
+  width: 70%;
+  height: 80%;
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.sairX{
+  font-size: 50px;
   cursor: pointer;
+}
+
+.modal-content img {
+  height: 70%;
+  width: 40%;
+  border-radius: 20px;
+  margin-right: 2rem;
+  margin-top: 50px;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.info-container h2 {
+  font-size: 50px;
+  margin-bottom: 1rem;
+}
+
+.info-container .detailsText {
+  font-size: 30px;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.additional-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.additional-info .icon-text {
+  display: flex;
+  align-items: center;
+}
+
+.userIcon, .priceIcon, .locationIcon {
+  font-size: 30px;
+  margin-right: 8px;
+}
+
+.sellerText, .priceText, .locationText {
+  font-size: 30px;
+  color: #333;
+}
+
+.anuncios {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem 7.3rem;
+  padding: 2rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.anuncios .anuncio {
+  background-color: #e6e6e6;
+  border-radius: 20px;
+  height: 400px;
+  transition: .3s;
+  text-align: center;
+  box-sizing: border-box;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.anuncios .anuncio img {
+  height: 70%;
+  border-radius: 5px;
+  margin-top: 10px;
+  box-shadow: 1px 1px 1px 1px #b6b6b6;
+}
+
+.anuncios h1 {
+  margin-top: 9px;
+  font-size: 25px;
+}
+
+.anuncios .anuncio:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  box-shadow: 2px 2px 2px 2px #b6b6b6;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+footer{
+  background-color: #ffe818;
+  width: 100%;
+  border-radius: 1rem 2rem 0 0;
+  text-align: center;
+  color: #494949;
+  font-weight: 20px;
+  height: 30px;
 }
 
 .user-data div {

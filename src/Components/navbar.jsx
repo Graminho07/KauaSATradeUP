@@ -1,4 +1,5 @@
 import { FaHome, FaUser, FaArrowCircleLeft } from 'react-icons/fa';
+import { BsSearch } from "react-icons/bs";
 
 const Navbar = () => {
     return (
@@ -13,6 +14,12 @@ const Navbar = () => {
                         <p>Home</p>
                     </a>
                 </div>
+
+                <div className='search'>
+                    <BsSearch className='lupa'/>
+                    <input type="text" placeholder='Pesquisar'/>
+                </div>
+
                 <div className="row">
                     <a href="/">
                         <FaArrowCircleLeft />
