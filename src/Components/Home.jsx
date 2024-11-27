@@ -5,10 +5,15 @@ import { IoCloseSharp } from "react-icons/io5";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoIosPricetag } from "react-icons/io";
 import { FaUser } from 'react-icons/fa';
+import { GoArrowSwitch } from "react-icons/go";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 
 const Home = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [activeChat, setActiveChat] = useState(null);
+    const [icon, setIcon] = useState('close');
 
     const handleOpenModal = (product) => {
         setSelectedProduct(product);
@@ -104,14 +109,140 @@ const Home = () => {
         }
     ];
 
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
+    
+    const closeChat = () => {
+        setActiveChat(null);
+        setIcon('close');
+    };
+
+    const openChat = (chat) => {
+        setActiveChat(chat);
+        setIcon('arrow_back');
+    };
+
+    const chats = [
+        {
+            id: 1,
+            name: "Jorge da Silva",
+            avatar: "https://www.freepnglogos.com/uploads/j-letter-png/j-letter-white-letter-clip-art-clkerm-vector-clip-art-19.png",
+            messages: [
+                { text: "Olá, tudo bem?", from: "Jorge" },
+                { text: "Gostei do seu anúncio!", from: "Jorge" },
+                { text: "Obrigado!", from: "Você" },
+            ],
+        },
+        {
+            id: 2,
+            name: "Gabriela Souza",
+            avatar: "https://www.pngplay.com/wp-content/uploads/5/Alphabet-G-Transparent-Image.png",
+            messages: [
+                { text: "Essa camisa ainda está disponível?", from: "Gabriela" },
+                { text: "Sim, está!", from: "Você" },
+            ],
+        },
+        {
+            id: 3,
+            name: "Antônio Cardoso",
+            avatar: "https://th.bing.com/th/id/OIP.jlPIaILkOrNb6G1rWruQyQHaHa?rs=1&pid=ImgDetMain",
+            messages: [
+                { text: "Gostaria de negociar o preço.", from: "Antônio" },
+                { text: "Claro, qual é sua oferta?", from: "Você" },
+            ],
+        },
+    ];
+
     return (
         <>
             <div className="home">
+                <div className="floating-button-with-image" onClick={toggleSidebar}>
+                    {isSidebarOpen ? (
+                        <IoCloseSharp className="close-icon" />
+                    ) : (
+                        <>
+                            <img
+                                src="https://algecenterdanmark.com/wp-content/uploads/2022/06/ACDK__Videndeling.png"
+                                alt="IA"
+                            />
+                        </>
+                    )}
+                </div>
+
+                <div className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
+    <div className="sidebar-header">
+        {activeChat ? (
+            <>
+                <button onClick={closeChat} className="back-button">
+                    <FaArrowLeft />
+                </button>
+                <h3>{activeChat.name}</h3>
+            </>
+        ) : (
+            <h3>Conversas</h3>
+        )}
+    </div>
+    <div className="sidebar-content">
+        {activeChat ? (
+            <>
+                <div className="chat-messages">
+                    {activeChat.messages.map((message, index) => (
+                        <div
+                            key={index}
+                            className={`message ${
+                                message.from === "Você" ? "sent" : "received"
+                            }`}
+                        >
+                            <p>{message.text}</p>
+                        </div>
+                    ))}
+                </div>
+                <div className="chat-input">
+                    <input
+                        type="text"
+                        placeholder="Digite sua mensagem"
+                    />
+                    <FaArrowRight className="icon-send" />
+                </div>
+            </>
+        ) : (
+            <div className="chat-list">
+                {chats.map((chat) => (
+                    <div
+                        key={chat.id}
+                        className="chat-item"
+                        onClick={() => openChat(chat)}
+                    >
+                        <img
+                            src={chat.avatar}
+                            alt={chat.name}
+                            className="chat-avatar"
+                        />
+                        <div className="chat-info">
+                            <h4>{chat.name}</h4>
+                            <p>
+                                {chat.messages[chat.messages.length - 1].text}
+                            </p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        )}
+    </div>
+</div>
+
+
                 <Navbar />
                 <div className="novoAnuncio">
                     <button>
                         <FaPlusCircle className="icon-add" />
                         <p>Novo anúncio</p>
+                    </button>
+
+                    <button>
+                        <GoArrowSwitch className="icon-barter" />
+                        <p>Trocar produto</p>
                     </button>
                 </div>
                 <div className="content">
@@ -129,37 +260,51 @@ const Home = () => {
                         ))}
                     </div>
 
-
                     {isModalOpen && (
                         <div className="modal-overlay" onClick={handleCloseModal}>
-                            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                                <IoCloseSharp className="sairX" onClick={handleCloseModal} />
-                                 <img src={selectedProduct.image} />
+                            <div
+                                className="modal-content"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                <IoCloseSharp
+                                    className="sairX"
+                                    onClick={handleCloseModal}
+                                />
+                                <img src={selectedProduct.image} />
 
-                                    <div className="info-container">
-                                        <h2>{selectedProduct.name}</h2>
-                                        <p className="detailsText">{selectedProduct.details}</p>
+                                <div className="info-container">
+                                    <h2>{selectedProduct.name}</h2>
+                                    <p className="detailsText">
+                                        {selectedProduct.details}
+                                    </p>
                                     <div className="additional-info">
-
-                                    <div className="icon-text">
-                                        <FaUser className="userIcon" />
-                                        <p className="sellerText">{selectedProduct.seller}</p>
+                                        <div className="icon-text">
+                                            <FaUser className="userIcon" />
+                                            <p className="sellerText">
+                                                {selectedProduct.seller}
+                                            </p>
+                                        </div>
+                                        <div className="icon-text">
+                                            <IoIosPricetag className="priceIcon" />
+                                            <p className="priceText">
+                                                {selectedProduct.price}
+                                            </p>
+                                        </div>
+                                        <div className="icon-text">
+                                            <IoLocationSharp className="locationIcon" />
+                                            <p className="locationText">
+                                                {selectedProduct.location}
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div className="icon-text">
-                                        <IoIosPricetag className="priceIcon" />
-                                        <p className="priceText">{selectedProduct.price}</p>
-                                    </div>
-                                    <div className="icon-text">
-                                        <IoLocationSharp className="locationIcon" />
-                                        <p className="locationText">{selectedProduct.location}</p>
-                                    </div>
-                                    </div>
-                                    </div>
+                                </div>
                             </div>
                         </div>
                     )}
 
-                    <footer>© 2024 Trade Up - Todos os direitos reservados.</footer>
+                    <footer>
+                        © 2024 Trade Up - Todos os direitos reservados.
+                    </footer>
                 </div>
             </div>
         </>
