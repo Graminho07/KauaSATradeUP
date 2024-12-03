@@ -1,5 +1,6 @@
 import { FaHome, FaUser, FaArrowCircleLeft } from 'react-icons/fa';
 import { BsSearch } from "react-icons/bs";
+import { IoIosHelpCircle } from "react-icons/io";
 
 const Navbar = () => {
     return (
@@ -12,6 +13,11 @@ const Navbar = () => {
                     <a href="/home">
                         <FaHome className="icon" />
                         <p>Home</p>
+                    </a>
+
+                    <a href="/ajuda">
+                        <IoIosHelpCircle className='icon' />
+                        <p>Ajuda</p>
                     </a>
                 </div>
 

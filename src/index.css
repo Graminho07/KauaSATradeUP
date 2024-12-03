@@ -565,3 +565,109 @@ button:focus-visible {
   color: white;
   font-size: 30px;
 }
+
+.titlePerguntas {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 20px;
+  color: #2c3e50;
+}
+
+details {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 10px auto;
+  max-width: 600px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+details summary {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #3498db;
+  margin-bottom: 5px;
+}
+
+details p {
+  margin-top: 5px;
+  font-size: 1rem;
+  color: #555;
+}
+
+details summary:hover,
+details summary:focus {
+  color: #1abc9c;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .titlePerguntas {
+      font-size: 1.5rem;
+  }
+
+  details {
+      padding: 8px;
+  }
+
+  details summary {
+      font-size: 1rem;
+  }
+}
+
+.contactTitle {
+  font-size: 1.8rem;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #34495e;
+}
+
+/* Formulário de contato */
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.contactForm label {
+  align-self: flex-start;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.contactForm input,
+.contactForm textarea {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.contactForm button {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contactForm button:hover {
+  background-color: #2980b9;
+}
